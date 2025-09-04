@@ -16,6 +16,16 @@ const { title } = Astro.props;
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
         <title>{title}</title>
+
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content="Classic Pong game made with Astro, Preact, and Tailwind" />
+        <meta property="og:image" content="https://pong.zkjon.dev/og.png" />
+        <meta property="og:type" content="website" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content="Classic Pong game made with Astro, Preact, and Tailwind" />
+        <meta name="twitter:image" content="https://pong.zkjon.dev/og.png" />
     </head>
     <body class="bg-black text-white font-mono overflow-hidden">
         <slot />
