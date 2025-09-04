@@ -1,10 +1,10 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 
-import preact from '@astrojs/preact';
-import tailwindcss from '@tailwindcss/vite';
+import preact from "@astrojs/preact";
+import tailwindcss from "@tailwindcss/vite";
 
-import path from 'node:path';
+import path from "node:path";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,7 +14,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
     resolve: {
       alias: {
-        '@': path.resolve('./src'),
+        "@": path.resolve("./src"),
       },
     },
   },

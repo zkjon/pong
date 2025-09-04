@@ -34,7 +34,7 @@
       }
     }
   },
-   "overrides": [
+  "overrides": [
     {
       "includes": ["**/*.svelte", "**/*.astro", "**/*.vue"],
       "linter": {
