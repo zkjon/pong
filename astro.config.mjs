@@ -4,7 +4,7 @@ import { defineConfig } from 'astro/config';
 import preact from '@astrojs/preact';
 import tailwindcss from '@tailwindcss/vite';
 
-import path from 'path';
+import path from 'node:path';
 
 // https://astro.build/config
 export default defineConfig({
