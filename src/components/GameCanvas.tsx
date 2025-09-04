@@ -1,4 +1,3 @@
-import { useRef } from 'preact/hooks';
 import type { Ref } from 'preact';
 import type { GameConfig } from '@/types/game';
 
