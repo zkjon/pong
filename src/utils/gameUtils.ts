@@ -1,4 +1,4 @@
-import type { Ball, Paddle, GameConfig } from "@/types/game";
+import type { Ball, Paddle, GameConfig, AIConfig, DifficultyLevel } from "@/types/game";
 
 export function checkBallPaddleCollision(ball: Ball, paddle: Paddle): boolean {
   return (
@@ -72,4 +72,71 @@ export function drawGame(
 
   // Ball
   ctx.fillRect(ball.x, ball.y, ball.size, ball.size);
+}
+
+export function getAIConfigForDifficulty(difficulty: DifficultyLevel): AIConfig {
+  switch (difficulty) {
+    case 'easy':
+      return {
+        reactionSpeed: 0.6,
+        accuracy: 0.7,
+        difficultyLevel: difficulty,
+      };
+    case 'medium':
+      return {
+        reactionSpeed: 0.8,
+        accuracy: 0.85,
+        difficultyLevel: difficulty,
+      };
+    case 'hard':
+      return {
+        reactionSpeed: 0.95,
+        accuracy: 0.95,
+        difficultyLevel: difficulty,
+      };
+    default:
+      return getAIConfigForDifficulty('medium');
+  }
+}
+
+export function updateAIPaddle(
+  paddle: Paddle,
+  ball: Ball,
+  config: GameConfig,
+  aiConfig: AIConfig,
+  canvasHeight: number,
+): void {
+  // Only move if ball is coming towards AI paddle (right side)
+  if (ball.dx <= 0) return;
+
+  // Calculate target position for paddle center
+  const paddleCenter = paddle.y + paddle.height / 2;
+  const ballCenterY = ball.y + ball.size / 2;
+  
+  // Add some prediction based on ball velocity
+  const timeToReachPaddle = (paddle.x - ball.x) / Math.abs(ball.dx);
+  const predictedBallY = ball.y + ball.dy * timeToReachPaddle * aiConfig.accuracy;
+  
+  // Add some randomness based on accuracy
+  const accuracyOffset = (Math.random() - 0.5) * paddle.height * (1 - aiConfig.accuracy);
+  const targetY = predictedBallY + accuracyOffset;
+  
+  // Calculate the difference between current position and target
+  const diff = targetY - paddleCenter;
+  
+  // Only move if difference is significant enough (reaction speed factor)
+  const minMovement = paddle.height * 0.1;
+  if (Math.abs(diff) < minMovement) return;
+  
+  // Apply reaction speed - AI doesn't move instantly
+  const shouldMove = Math.random() < aiConfig.reactionSpeed;
+  if (!shouldMove) return;
+  
+  // Move towards target position
+  const moveSpeed = config.paddleSpeed * aiConfig.reactionSpeed;
+  if (diff > 0) {
+    movePaddle(paddle, 'down', moveSpeed, canvasHeight);
+  } else {
+    movePaddle(paddle, 'up', moveSpeed, canvasHeight);
+  }
 }

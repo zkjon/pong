@@ -22,6 +22,16 @@ export interface Score {
   right: number;
 }
 
+export type GameMode = 'twoPlayer' | 'singlePlayer';
+
+export type DifficultyLevel = 'easy' | 'medium' | 'hard';
+
+export interface AIConfig {
+  reactionSpeed: number; // How fast AI reacts (0-1, where 1 is instant)
+  accuracy: number; // How accurately AI tracks the ball (0-1)
+  difficultyLevel: DifficultyLevel;
+}
+
 export interface GameConfig {
   canvasWidth: number;
   canvasHeight: number;
@@ -39,4 +49,6 @@ export interface GameState {
   score: Score;
   gameRunning: boolean;
   gameConfig: GameConfig;
+  gameMode: GameMode;
+  aiConfig: AIConfig;
 }
