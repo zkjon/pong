@@ -6,13 +6,16 @@ import {
   movePaddle,
   checkBallPaddleCollision,
   checkBallWallCollision,
+  getAIConfigForDifficulty,
+  updateAIPaddle,
 } from "@/utils/gameUtils";
-import type { GameState, GameConfig } from "@/types/game";
+import type { GameState, GameConfig, GameMode, DifficultyLevel } from "@/types/game";
 import GameHeader from "./GameHeader";
 import Scoreboard from "./Scoreboard";
 import GameCanvas from "./GameCanvas";
 import GameControls from "./GameControls";
 import GameInstructions from "./GameInstructions";
+import GameModeSelector from "./GameModeSelector";
 
 const GAME_CONFIG: GameConfig = {
   canvasWidth: 800,
@@ -55,6 +58,8 @@ export default function PongGame() {
     },
     gameRunning: false,
     gameConfig: GAME_CONFIG,
+    gameMode: 'twoPlayer' as GameMode,
+    aiConfig: getAIConfigForDifficulty('medium'),
   });
 
   // Main game loop
@@ -71,7 +76,7 @@ export default function PongGame() {
         const rightPaddle = { ...newState.rightPaddle };
         const score = { ...newState.score };
 
-        // Move paddles
+        // Move left paddle (always player controlled)
         if (keys.has("w")) {
           movePaddle(
             leftPaddle,
@@ -88,19 +93,32 @@ export default function PongGame() {
             GAME_CONFIG.canvasHeight,
           );
         }
-        if (keys.has("arrowup")) {
-          movePaddle(
+
+        // Move right paddle (player controlled in two-player mode, AI in single-player mode)
+        if (newState.gameMode === 'twoPlayer') {
+          if (keys.has("arrowup")) {
+            movePaddle(
+              rightPaddle,
+              "up",
+              GAME_CONFIG.paddleSpeed,
+              GAME_CONFIG.canvasHeight,
+            );
+          }
+          if (keys.has("arrowdown")) {
+            movePaddle(
+              rightPaddle,
+              "down",
+              GAME_CONFIG.paddleSpeed,
+              GAME_CONFIG.canvasHeight,
+            );
+          }
+        } else {
+          // AI controls right paddle in single-player mode
+          updateAIPaddle(
             rightPaddle,
-            "up",
-            GAME_CONFIG.paddleSpeed,
-            GAME_CONFIG.canvasHeight,
-          );
-        }
-        if (keys.has("arrowdown")) {
-          movePaddle(
-            rightPaddle,
-            "down",
-            GAME_CONFIG.paddleSpeed,
+            ball,
+            GAME_CONFIG,
+            newState.aiConfig,
             GAME_CONFIG.canvasHeight,
           );
         }
@@ -225,13 +243,39 @@ export default function PongGame() {
     }));
   };
 
+  const handleModeChange = (mode: GameMode) => {
+    if (gameState.gameRunning) return; // Don't allow mode change during game
+    setGameState((prev) => ({
+      ...prev,
+      gameMode: mode,
+    }));
+    resetGame();
+  };
+
+  const handleDifficultyChange = (difficulty: DifficultyLevel) => {
+    if (gameState.gameRunning) return; // Don't allow difficulty change during game
+    setGameState((prev) => ({
+      ...prev,
+      aiConfig: getAIConfigForDifficulty(difficulty),
+    }));
+  };
+
   return (
     <div class="flex flex-col items-center justify-center min-h-screen p-4">
       <GameHeader />
 
+      <GameModeSelector
+        gameMode={gameState.gameMode}
+        difficulty={gameState.aiConfig.difficultyLevel}
+        onModeChange={handleModeChange}
+        onDifficultyChange={handleDifficultyChange}
+        disabled={gameState.gameRunning}
+      />
+
       <Scoreboard
         leftScore={gameState.score.left}
         rightScore={gameState.score.right}
+        gameMode={gameState.gameMode}
       />
 
       <GameCanvas
@@ -251,7 +295,7 @@ export default function PongGame() {
         onReset={resetGame}
       />
 
-      <GameInstructions />
+      <GameInstructions gameMode={gameState.gameMode} />
     </div>
   );
 }
