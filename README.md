@@ -14,6 +14,8 @@ A classic Pong game built with modern web technologies.
 ## 🎮 Features
 
 - Fully functional 2-player Pong game
+- **Single-player mode with AI opponent**
+- **Multiple AI difficulty levels (Easy, Medium, Hard)**
 - Responsive keyboard controls
 - Scoring system
 - Realistic collision physics
@@ -22,6 +24,7 @@ A classic Pong game built with modern web technologies.
 
 ## 🎯 Controls
 
+### Two Player Mode
 - **Player 1**: 
     - `W` - Move paddle up
     - `S` - Move paddle down
@@ -29,6 +32,12 @@ A classic Pong game built with modern web technologies.
 - **Player 2**: 
     - `↑` - Move paddle up
     - `↓` - Move paddle down
+
+### Single Player Mode (vs AI)
+- **Player**: 
+    - `W` - Move paddle up
+    - `S` - Move paddle down
+- **AI**: Automatically controls the right paddle
 
 ## 🛠️ Installation & Setup
 
@@ -111,8 +120,8 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ## 🎯 Upcoming Features
 
-- [ ] AI for single player mode
-- [ ] Multiple difficulty levels
+- [x] AI for single player mode
+- [x] Multiple difficulty levels
 - [ ] Sound effects
 - [ ] Online multiplayer mode
 - [ ] Different visual themes
