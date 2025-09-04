@@ -1,0 +1,23 @@
+---
+import '@/styles/global.css';
+
+export interface Props {
+    title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Classic Pong game made with Astro, Preact, and Tailwind" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <title>{title}</title>
+    </head>
+    <body class="bg-black text-white font-mono overflow-hidden">
+        <slot />
+    </body>
+</html>
