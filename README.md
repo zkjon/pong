@@ -70,30 +70,6 @@ bun dev
 | `bun astro ...`           | Run CLI commands like `astro add`, `astro check`|
 | `bun astro -- --help`     | Get help using Astro CLI                        |
 
-## 🏗️ Project Structure
-
-```
-/
-├── public/               # Static files
-├── src/
-│   ├── components/       # Preact components
-│   │   └── PongGame.tsx  # Main game component
-│   ├── hooks/            # Custom hooks
-│   │   └── useKeyboard.ts
-│   ├── layouts/          # Astro layouts
-│   │   └── Layout.astro
-│   ├── pages/            # Site pages
-│   │   └── index.astro
-│   ├── styles/           # Global styles
-│   │   └── global.css
-│   ├── types/            # TypeScript type definitions
-│   │   └── game.ts
-│   └── utils/            # Game utilities
-│       └── gameUtils.ts
-├── astro.config.mjs      # Astro configuration
-├── tailwind.config.mjs   # Tailwind configuration
-└── tsconfig.json         # TypeScript configuration
-```
 
 ## 🎨 Technical Highlights
 
