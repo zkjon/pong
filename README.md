@@ -1,3 +1,5 @@
+![PONG](./public/og.png)
+
 # 🏓 Pong Game
 
 A classic Pong game built with modern web technologies.
