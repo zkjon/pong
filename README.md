@@ -32,18 +32,18 @@ A classic Pong game built with modern web technologies.
 
 1. Clone the repository:
 ```bash
-git clone <your-repository>
+git clone https://github.com/zkjon/pong.git
 cd pong
 ```
 
 2. Install dependencies:
 ```bash
-npm install
+bun install
 ```
 
 3. Start the development server:
 ```bash
-npm run dev
+bun dev
 ```
 
 4. Open your browser at `http://localhost:4321`
@@ -52,12 +52,12 @@ npm run dev
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Install dependencies                            |
-| `npm run dev`             | Start development server at `localhost:4321`    |
-| `npm run build`           | Build the site for production in `./dist/`      |
-| `npm run preview`         | Preview the local build                         |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check`|
-| `npm run astro -- --help` | Get help using Astro CLI                        |
+| `bun install`             | Install dependencies                            |
+| `bun dev`                 | Start development server at `localhost:4321`    |
+| `bun build`               | Build the site for production in `./dist/`      |
+| `bun preview`             | Preview the local build                         |
+| `bun astro ...`           | Run CLI commands like `astro add`, `astro check`|
+| `bun astro -- --help`     | Get help using Astro CLI                        |
 
 ## 🏗️ Project Structure
 
