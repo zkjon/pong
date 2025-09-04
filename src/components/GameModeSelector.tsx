@@ -18,7 +18,7 @@ export default function GameModeSelector({
   return (
     <div class="flex flex-col items-center gap-4 mb-4">
       <div class="flex items-center gap-4">
-        <label class="text-white font-semibold">Game Mode:</label>
+        <span class="text-white font-semibold">Game Mode:</span>
         <div class="flex gap-2">
           <button
             type="button"
@@ -49,7 +49,7 @@ export default function GameModeSelector({
 
       {gameMode === 'singlePlayer' && (
         <div class="flex items-center gap-4">
-          <label class="text-white font-semibold">AI Difficulty:</label>
+          <span class="text-white font-semibold">AI Difficulty:</span>
           <div class="flex gap-2">
             <button
               type="button"

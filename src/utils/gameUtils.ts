@@ -111,7 +111,7 @@ export function updateAIPaddle(
 
   // Calculate target position for paddle center
   const paddleCenter = paddle.y + paddle.height / 2;
-  const ballCenterY = ball.y + ball.size / 2;
+  const _ballCenterY = ball.y + ball.size / 2;
   
   // Add some prediction based on ball velocity
   const timeToReachPaddle = (paddle.x - ball.x) / Math.abs(ball.dx);
